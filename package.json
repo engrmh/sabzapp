@@ -1,0 +1,21 @@
+{
+  "name": "abzlearn",
+  "version": "1.0.0",
+  "author": "engrmh",
+  "main": "./main.js",
+  "devDependencies": {
+    "electron": "30.0.2",
+    "electron-installer-dmg": "^4.0.0",
+    "electron-packager": "^17.1.2"
+  },
+  "description": "sabzlearn app",
+  "keywords": [],
+  "productName": "parsimonious-trouble-like-tqjnf",
+  "scripts": {
+    "start": "electron .",
+    "package-mac": "electron-packager . SabzLearn --platform=darwin --arch=x64 --out=release-builds --icon=icon/mac.icns",
+    "package-win": "electron-packager . SabzLearn --platform=win32 --arch=ia32 --out=release-builds --icon=icon/win.ico",
+    "package-linux": "electron-packager . SabzLearn --platform=linux --arch=x64 --out=release-builds --icon=icon/linux.png",
+    "create-dmg": "electron-installer-dmg release-builds/sabzlearn-darwin-x64/SabzLearn.app SabzLearn --out=release-builds"
+  }
+}
