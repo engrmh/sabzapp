@@ -12,9 +12,15 @@ function createWindow() {
   });
 
   mainWindow.loadURL("https://sabzlearn.ir/");
+  mainWindow.removeMenu();
 
   mainWindow.webContents.on("devtools-opened", () => {
     mainWindow.webContents.closeDevTools();
+    mainWindow.close();
+  });
+
+  mainWindow.webContents.on("context-menu", (e) => {
+    e.preventDefault();
   });
 
   globalShortcut.register("PrintScreen", () => {
