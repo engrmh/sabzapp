@@ -1,21 +1,74 @@
 {
-  "name": "abzlearn",
+  "name": "sabzlearn",
   "version": "1.0.0",
   "author": "engrmh",
   "main": "./main.js",
   "devDependencies": {
     "electron": "30.0.2",
+    "electron-builder": "^24.13.3",
     "electron-installer-dmg": "^4.0.0",
-    "electron-packager": "^17.1.2"
+    "electron-packager": "^17.1.2",
+    "electron-winstaller": "^5.3.1"
   },
-  "description": "sabzlearn app",
+  "build": {
+    "appId": "com.sabzlearn.myapp",
+    "productName": "sabzlearn",
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "assets/app-icon/win/win.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": true,
+      "allowElevation": true,
+      "allowToChangeInstallationDirectory": true,
+      "installerIcon": "assets/app-icon/win/installer.ico",
+      "uninstallerIcon": "assets/app-icon/win/uninstaller.ico",
+      "installerHeaderIcon": "assets/app-icon/win/installer-header.ico",
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "SabzLearn"
+    },
+    "directories": {
+      "buildResources": "assets"
+    },
+    "files": [
+      "main.js",
+      "package.json",
+      "assets/**/*",
+      "dist/**/*",
+      "!node_modules/*/{CHANGELOG.md,README.md,README,readme.md,readme}",
+      "!**/tests",
+      "!**/*.map",
+      "!**/*.ts",
+      "!**/*.scss",
+      "!**/*.less"
+    ],
+    "extraResources": [
+      "extra-files/**/*"
+    ],
+    "asar": true,
+    "npmRebuild": true
+  },
+  "description": "SabzLearn app",
   "keywords": [],
-  "productName": "parsimonious-trouble-like-tqjnf",
+  "productName": "sabzlearn",
   "scripts": {
     "start": "electron .",
-    "package-mac": "electron-packager . SabzLearn --platform=darwin --arch=x64 --out=release-builds --icon=icon/mac.icns",
-    "package-win": "electron-packager . SabzLearn --platform=win32 --arch=ia32 --out=release-builds --icon=icon/win.ico",
-    "package-linux": "electron-packager . SabzLearn --platform=linux --arch=x64 --out=release-builds --icon=icon/linux.png",
-    "create-dmg": "electron-installer-dmg release-builds/sabzlearn-darwin-x64/SabzLearn.app SabzLearn --out=release-builds"
+    "package-win": "electron-builder --win --x64",
+    "package-wininstaller": "electron-packager . sabzlearn --platform=win32 --arch=x64 --out=release-builds/release-builds-Win --overwrite --icon=icon/win.ico",
+    "create-wininstaller": "node createInstaller.js",
+    "package-mac": "electron-packager . SabzLearn --platform=darwin --arch=x64 --out=release-builds/release-builds-Mac --icon=icon/mac.icns",
+    "create-dmg": "electron-installer-dmg release-builds/release-builds-Mac/sabzlearn-darwin-x64/SabzLearn.app SabzLearn --out=release-builds/Mac",
+    "package-linux": "electron-packager . SabzLearn --platform=linux --arch=x64 --out=release-builds/release-builds-linux --icon=icon/linux.png",
+    "create-deb": "electron-installer-debian --src release-builds/release-builds-linux/SabzLearn-linux-x64/ --dest release-builds/release-builds-linux/deb/ --arch amd64",
+    "create-rpm": "electron-installer-redhat --src release-builds/release-builds-linux/SabzLearn-linux-x64/ --dest release-builds/release-builds-linux/rpm/ --arch x86_64"
   }
 }

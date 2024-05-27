@@ -8,7 +8,7 @@ function createWindow() {
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
     },
-    icon: path.join(__dirname, "icon", "mac.icns"),
+    icon: path.join(__dirname, "icon", "win.ico"),
   });
 
   mainWindow.loadURL("https://sabzlearn.ir/");
