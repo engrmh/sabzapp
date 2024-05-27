@@ -8,7 +8,8 @@
     "electron-builder": "^24.13.3",
     "electron-installer-dmg": "^4.0.0",
     "electron-packager": "^17.1.2",
-    "electron-winstaller": "^5.3.1"
+    "electron-winstaller": "^5.3.1",
+    "electron-installer-debian": "^3.2.0"
   },
   "build": {
     "appId": "com.sabzlearn.myapp",
